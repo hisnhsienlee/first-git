@@ -1,0 +1,2 @@
+./QFirehose -f /opt/HDD1/01_test/SA525M_PVM_AB -l /opt/HDD1/wii/log -n -p /dev/ttyUSB1
+./QFirehose -f /opt/HDD1/02_test -l /opt/HDD1/wii/log -n -p /dev/ttyUSB1

@@ -1,0 +1,102 @@
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/time.h>
+#include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <linux/un.h>
+#include <linux/rtc.h>
+#include <pthread.h>
+#include <signal.h>
+#include <errno.h>
+#include <ctype.h>
+#include <time.h>
+
+#include <iostream>
+#include <ctime>
+#include <vector>
+#include <sstream>
+#include <string>
+
+#include "logger.h"
+
+#include <regex>
+bool isValidInput(const std::string& str, int rule)
+{
+    std::regex pattern(R"(\+?\d+)");
+	switch (rule)
+	{
+	case 0: //只能是數字和+號 數字可以重複	
+        pattern.assign(R"(\+?\d+)");
+		break;
+	case 1://只能是數字4~8位數	
+		pattern.assign(R"(\d{4,8})");
+		break;
+	case 2://只能是數字8~12位數	
+		pattern.assign(R"(\d{8,12})");
+		break;
+	case 3:
+		pattern.assign(R"(\d+)");
+		break;
+	case 4:
+		pattern.assign(R"([a-zA-Z]*)");
+		break;
+	default:
+		break;
+	}
+
+    return std::regex_match(str, pattern);
+}
+//驗證input是否為數字
+bool isNumber(const std::string& str)
+{
+    std::regex pattern(R"(\d+)");
+    return std::regex_match(str, pattern);
+}
+//驗證input是否為英文
+bool isEnglish(const std::string& str)
+{
+    std::regex pattern(R"([a-zA-Z]*)");
+    return std::regex_match(str, pattern);
+}
+//驗證input是否為英文+數字
+bool isEnglishAndNumber(const std::string& str)
+{
+    std::regex pattern(R"([a-zA-Z0-9]*)");
+    return std::regex_match(str, pattern);
+}
+//驗證input是否為英文+數字+符號
+bool isEnglishAndNumberAndSymbol(const std::string& str)
+{
+    std::regex pattern(R"([a-zA-Z0-9\W]*)");
+    return std::regex_match(str, pattern);
+}
+//驗證input是否為符號
+bool isSymbol(const std::string& str)
+{
+    std::regex pattern(R"([\W]*)");
+    return std::regex_match(str, pattern);
+}
+//驗證input是否為4~8位數字
+bool isNumber4To8(const std::string& str)
+{
+    std::regex pattern(R"(\d{4,8})");
+    return std::regex_match(str, pattern);
+}
+//驗證input是否為8~12位數字
+bool isNumber8To12(const std::string& str)
+{
+    std::regex pattern(R"(\d{8,12})");
+    return std::regex_match(str, pattern);
+}
+int main() {
+    LOG("test");
+    return 0;
+}

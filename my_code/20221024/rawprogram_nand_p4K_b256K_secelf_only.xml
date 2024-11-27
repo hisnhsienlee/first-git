@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<data>
+  <program PAGES_PER_BLOCK="64" SECTOR_SIZE_IN_BYTES="4096" filename="sec.elf" num_partition_sectors="256" physical_partition_number="0" start_sector="10496"/>
+</data>
